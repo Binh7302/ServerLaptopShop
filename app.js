@@ -4,8 +4,15 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+const cors = require('cors');
+const session = require('express-session');
+
+const mongoose = require('mongoose');
+require('./components/users/model');
+
+//routes
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var apiRouter = require('./routes/api');
 
 var app = express();
 
@@ -18,9 +25,29 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  secret: 'admin',
+  resave: true,
+  saveUninitialized: true,
+  cookie: { secure: false }
+}));
+app.use(cors());
+app.all('/', function (request, response, next) {
+  response.header("Access-Control-Allow-Origin", "*");
+  response.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});
 
+mongoose.connect('mongodb+srv://phucbinh7302:phucbinh7302@cluster0.38nr2eo.mongodb.net/laptopshop?retryWrites=true&w=majority', {  
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => console.log('>>>>>>>>>> DB Connected!!!!!!'))
+.catch(err => console.log('>>>>>>>>> DB Error: ', err));
+
+// routes
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/api', apiRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
