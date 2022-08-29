@@ -3,9 +3,7 @@
 const userModel = require('./model');
 
 exports.login = async (username) => {
-    const user = await userModel.findOne({ username: username }, 'id username role password name, email, phonenumber');
-    console.log(username);
-    console.log(user);
+    const user = await userModel.findOne({ username: username }, 'id username role password name email phonenumber');
     return user;
 }
 

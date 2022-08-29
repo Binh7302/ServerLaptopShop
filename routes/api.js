@@ -11,7 +11,7 @@ router.post('/login', async function (req, res, next) {
   const { username, password } = req.body;
 
   // thực hiện kiểm tra đăng nhập
-  const result = await userController.login(username, password);
+  const result = await userController.loginApp(username, password);
   if (result) {
     // secret key
     const token = jwt.sign({ id: result._id, username: result.username }, 'admin')

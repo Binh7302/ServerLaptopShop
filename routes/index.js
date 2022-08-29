@@ -27,9 +27,10 @@ const authentication = require('../middle/authentication');
  */
  router.post('/login', async function(req, res, next){
   const { username, password } = req.body;
-
+  console.log(username+" "+password);
   // thực hiện kiểm tra đăng nhập
-  const result = await userController.login(username,password);
+  const result = await userController.loginWeb(username,password);
+  console.log(result+" check");
   if(result) {
     // secret key
     const token = jwt.sign({ id: result._id, username: result.username }, 'admin')

@@ -3,10 +3,18 @@
 const userService = require('./service');
 const bcrypt = require('bcryptjs');
 
-exports.login = async (username, password) => {
+exports.loginWeb = async (username, password) => {
     const user = await userService.login(username);
     if(!user) return null;
     if(user.role != 1) return null;
+    const checkPassword = await bcrypt.compare(password, user.password);
+    if(!checkPassword) return null;
+    return { _id: user._id, username: user.username }
+}
+
+exports.loginApp = async (username, password) => {
+    const user = await userService.login(username);
+    if(!user) return null;
     const checkPassword = await bcrypt.compare(password, user.password);
     if(!checkPassword) return null;
     return { _id: user._id, username: user.username }
