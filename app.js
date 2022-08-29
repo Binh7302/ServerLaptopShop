@@ -13,6 +13,10 @@ require('./components/users/model');
 //routes
 var indexRouter = require('./routes/index');
 var apiRouter = require('./routes/api');
+var productsRouter = require('./routes/products');
+var brandsRouter = require('./routes/brands');
+var usersRouter = require('./routes/users');
+var ordersRouter = require('./routes/orders');
 
 var app = express();
 
@@ -47,7 +51,11 @@ mongoose.connect('mongodb+srv://phucbinh7302:phucbinh7302@cluster0.38nr2eo.mongo
 
 // routes
 app.use('/', indexRouter);
-app.use('/api', apiRouter)
+app.use('/api', apiRouter);
+app.use('/products', productsRouter);
+app.use('/brands', brandsRouter);
+app.use('/users', usersRouter);
+app.use('/oders', ordersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

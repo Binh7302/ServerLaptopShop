@@ -1,0 +1,160 @@
+<section style="position: static;" id="container">
+  <!-- **********************************************************************************************************************************************************
+      TOP BAR CONTENT & NOTIFICATIONS
+      *********************************************************************************************************************************************************** -->
+  <!--header start-->
+  <header class="header black-bg">
+    <div class="sidebar-toggle-box">
+      <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+    </div>
+    <!--logo start-->
+    <a href="/products" class="logo"><b>Laptop Shop</b></a>
+    <!--logo end-->
+    <div class="nav notify-row" id="top_menu">
+    </div>
+    <div class="top-menu">
+      <ul class="nav pull-right top-menu">
+        <li><a class="logout" href="/logout">Logout</a></li>
+      </ul>
+    </div>
+  </header>
+  <!--header end-->
+
+  <!-- **********************************************************************************************************************************************************
+      MAIN SIDEBAR MENU
+      *********************************************************************************************************************************************************** -->
+  <!--sidebar start-->
+  <aside>
+    <div id="sidebar" class="nav-collapse ">
+      <!-- sidebar menu start-->
+      <ul class="sidebar-menu" id="nav-accordion">
+
+        <p class="centered"><a href="profile.html"><img src="/images/ui-sam.jpg" class="img-circle" width="60"></a></p>
+        <h5 class="centered">Marcel Newman</h5>
+
+        <li class="sub-menu">
+          <a href="javascript:;">
+            <i class="fa fa-th"></i>
+            <span>Danh sách</span>
+          </a>
+          <ul class="sub">
+            <li><a href="/products">Sản phẩm</a></li>
+            <li><a href="/brands">Nhãn hiệu</a></li>
+            <li><a href="/users">Khách hàng</a></li>
+            <li><a href="/oders">Đơn hàng</a></li>
+          </ul>
+        </li>
+
+        <li class="sub-menu">
+          <a href="javascript:;">
+            <i class="fa fa-tasks"></i>
+            <span>Forms</span>
+          </a>
+          <ul class="sub">
+            <li><a href="/products/add">Thêm sản phẩm</a></li>
+            <li class="active"><a href="/brands/add">Thêm nhãn hiệu</a></li>
+          </ul>
+        </li>
+        <li class="sub-menu">
+          <a href="/">
+            <i class="fa fa-desktop"></i>
+            <span>Xử lý đơn hàng</span>
+          </a>
+        </li>
+        <li class="sub-menu">
+          <a href="javascript:;">
+            <i class=" fa fa-bar-chart-o"></i>
+            <span>Thống kê</span>
+          </a>
+          <ul class="sub">
+            <li><a href="/">Mặt hàng bán chạy</a></li>
+            <li><a href="/">Thông báo</a></li>
+          </ul>
+        </li>
+
+      </ul>
+      <!-- sidebar menu end-->
+    </div>
+  </aside>
+  <!--sidebar end-->
+
+  <!-- **********************************************************************************************************************************************************
+      MAIN CONTENT
+      *********************************************************************************************************************************************************** -->
+  <!--main content start-->
+  <section id="main-content" style="margin-bottom: 50px;">
+    <section class="wrapper">
+      <h3><i class="fa fa-angle-right"></i> Form Thêm Nhãn Hiệu</h3>
+
+      <!-- BASIC FORM ELELEMNTS -->
+      <div class="row mt">
+        <div class="col-lg-12">
+          <div class="form-panel" >
+            <h4 class="mb"><i class="fa fa-angle-right" ></i> Điền thông tin</h4>
+            <form class="form-horizontal style-form" method="post" action="/add" enctype="multipart/form-data" >
+              <div class="form-group">
+                <label class="col-sm-2 col-sm-2 control-label">Tên nhãn hiệu</label>
+                <div class="col-sm-10">
+                  <input type="text" onchange="validation()" class="form-control" type="text" name="name" id="name"
+                    placeholder="Tên nhãn hiệu">
+                </div>
+              </div>
+              <div class="form-group" style="margin-left: 0px;">
+                <label>Hình ảnh</label>
+                <input onchange="onChangeFile();" type="file" id="image-file" name="image" style="margin-left: 200px;">
+                <div class="btn-image" id="button" name="button" onclick="thisFileUpload();"style="margin-left: 200px;">Chose file</div>
+                <img style="display: none; object-fit: cover;margin-left: 200px;" src="" width="200" height="200" id="image-view" />
+              </div>
+              <button disabled type="submit" id="submit" style="margin-left: 1050px; width:100px">Thêm</button>
+            </form>
+          </div>
+        </div><!-- col-lg-12-->
+      </div><!-- /row -->
+
+      <!--main content end-->
+      <!--footer start-->
+      <footer style="position: fixed; bottom: 0; left: 210px; width: 1223px" class="site-footer">
+        <div class="text-center">
+          2014 - Alvarez.is
+          <a href="index.html#" class="go-top">
+            <i class="fa fa-angle-up"></i>
+          </a>
+        </div>
+      </footer>
+      <!--footer end-->
+    </section>
+    <script>
+      const validation = () => {
+        const name = document.getElementById('name').value;
+        const submit = document.getElementById('submit');
+        if (!name || name.trim().length == 0) {
+          submit.disabled = true;
+        } else {
+          submit.disabled = false;
+        }
+
+
+      }
+
+      // http://locahost:3000/san-pham/:id/edit
+      const edit = (id) => {
+        window.location.href = `san-pham/${id}/edit`;
+
+      }
+      function thisFileUpload() {
+        document.getElementById("image-file").click();
+
+      };
+
+      const onChangeFile = () => {
+        const file = document.getElementById('image-file').files[0];
+        const reader = new FileReader();
+        reader.onload = e => {
+          document.getElementById('image-view').src = e.target.result;
+          document.getElementById('image-view').style.display = 'block';
+        }
+        reader.readAsDataURL(file);
+      }
+
+
+    </script>

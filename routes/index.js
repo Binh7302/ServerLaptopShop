@@ -86,6 +86,7 @@ const authentication = require('../middle/authentication');
     res.redirect('/login');
   } else {
     // nếu sai vẫn ở trang đăng kí
+    res.redirect('/register');
   }
 });
 

@@ -1,0 +1,213 @@
+<section style="position: static;" id="container">
+    <!-- **********************************************************************************************************************************************************
+      TOP BAR CONTENT & NOTIFICATIONS
+      *********************************************************************************************************************************************************** -->
+    <!--header start-->
+    <header class="header black-bg">
+        <div class="sidebar-toggle-box">
+            <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+        </div>
+        <!--logo start-->
+        <a href="/products" class="logo"><b>Laptop Shop</b></a>
+        <!--logo end-->
+        <div class="nav notify-row" id="top_menu">
+        </div>
+        <div class="top-menu">
+            <ul class="nav pull-right top-menu">
+                <li><a class="logout" href="/logout">Logout</a></li>
+            </ul>
+        </div>
+    </header>
+    <!--header end-->
+
+    <!-- **********************************************************************************************************************************************************
+      MAIN SIDEBAR MENU
+      *********************************************************************************************************************************************************** -->
+    <!--sidebar start-->
+    <aside>
+        <div id="sidebar" class="nav-collapse ">
+            <!-- sidebar menu start-->
+            <ul class="sidebar-menu" id="nav-accordion">
+
+                <p class="centered"><a href="profile.html"><img src="/images/ui-sam.jpg" class="img-circle"
+                            width="60"></a></p>
+                <h5 class="centered">Marcel Newman</h5>
+
+                <li class="sub-menu">
+                    <a class="active" href="javascript:;">
+                        <i class="fa fa-th"></i>
+                        <span>Danh sách</span>
+                    </a>
+                    <ul class="sub">
+                        <li class="active"><a href="/products">Sản phẩm</a></li>
+                        <li><a href="/brands">Nhãn hiệu</a></li>
+                        <li><a href="/users">Khách hàng</a></li>
+                        <li><a href="/oders">Đơn hàng</a></li>
+                    </ul>
+                </li>
+
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-tasks"></i>
+                        <span>Forms</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a href="/products/add">Thêm sản phẩm</a></li>
+                        <li><a href="/brands/add">Thêm nhãn hiệu</a></li>
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a href="/">
+                        <i class="fa fa-desktop"></i>
+                        <span>Xử lý đơn hàng</span>
+                    </a>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class=" fa fa-bar-chart-o"></i>
+                        <span>Thống kê</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a href="/">Mặt hàng bán chạy</a></li>
+                        <li><a href="/">Thông báo</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+            <!-- sidebar menu end-->
+        </div>
+    </aside>
+    <!--sidebar end-->
+
+    <!-- **********************************************************************************************************************************************************
+      MAIN CONTENT
+      *********************************************************************************************************************************************************** -->
+    <!--main content start-->
+    <div style="position: absolute; top: 120px; left: 230px;" class="content" >
+        <div class="container">
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <h2>Danh sách <b>Sản phẩm</b></h2>
+                        </div>
+                        <div class="col-sm-4">
+                            <button type="button" onclick="addnew()" class="btn btn-info add-new"><i
+                                    class="fa fa-plus"></i> Add
+                                New</button>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th style="width: 40px;">STT</th>
+                            <th style="width: 200px;">Mã sản phẩm</th>
+                            <th style="width: 200px;">Tên sản phẩm</th>
+                            <th style="width: 80px;">Giá</th>
+                            <th style="width: 80px;">Số lượng</th>
+                            <th style="width: 200   px;">Hình ảnh</th>
+                            <th>Nhãn hiệu</th>
+                            <th>Trạng thái</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each products}}
+                        <tr>
+                            <td>{{this.index}}</td>
+                            <td>{{this._id}}</td>
+                            <td>{{this.name}}</td>
+                            <td>{{this.price}}</td>
+                            <td>{{this.quantity}}</td>
+                            <td>
+                                <img src="{{this.image}}" width="100" height="100">
+                            </td>
+                            <td>{{this.category.name}}</td>
+                            <td>{{this.release}}</td>
+                            <td>
+                                <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons"></i></a>
+                                <a class="edit" title="Edit" data-toggle="tooltip" onclick="edit('{{this._id}}')"><i
+                                        class="material-icons"></i></a>
+                                <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons"
+                                        onclick="goDelete('{{this._id}}')" data-toggle="modal"
+                                        data-target="#confirmModal"></i></a>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!--main content end-->
+    <!--footer start-->
+   <footer style="position: fixed; bottom: 0; left: 210px; width: 1223px" class="site-footer">
+        <div class="text-center">
+          2014 - Alvarez.is
+          <a href="index.html#" class="go-top">
+            <i class="fa fa-angle-up"></i>
+          </a>
+        </div>
+      </footer>
+    <!--footer end-->
+</section>
+
+<script>
+  // http://locahost:3000/san-pham/:id/edit
+  const edit = (id) => {
+    window.location.href = `san-pham/${id}/edit`;
+
+  }
+
+  const addnew = () => {
+    window.location.href = `san-pham/them-moi`;
+  }
+
+  let deleted_id;
+
+  const goDelete = (id) => {
+    deleted_id = id;
+  }
+
+  const fetchAPI = async (url, option) => {
+    const res = await fetch(url, option);
+    return res.json();
+  }
+
+  const onDelete = async () => {
+    const url = `https://bumbled-mob402.herokuapp.com/san-pham/${deleted_id}/delete`;
+    const option = {
+      method: 'delete',
+      headers: { 'Content-Type': 'application/json' }
+    }
+    try {
+      await fetchAPI(url, option);
+      window.location.href = '/san-pham';
+    } catch (e) { console.log('Delete error: ', e) }
+
+  }
+</script>
+
+<!--  Modals-->
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Confirm action</h4>
+      </div>
+      <div class="modal-body">
+        <div class="panel-body">
+          <h3>Are you sure?</h3>
+          <div class="form-group modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button type="button" onclick="onDelete()" class="btn btn-primary">Yes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modals-->
