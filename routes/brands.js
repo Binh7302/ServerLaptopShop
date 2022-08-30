@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
+const brandsController = require('../components/brands/controller');
 const authentication = require('../middle/authentication');
 /*
 * http://localhost:3000/brands
@@ -10,7 +11,9 @@ const authentication = require('../middle/authentication');
 * date: 29/8/2022
  */
  router.get('', [authentication.checkLogin],async function(req, res, next){
-  res.render('brands');
+  //lấy danh sách nhãn hiệu từ database
+  const data = await brandsController.getBrands();
+  res.render('brands', {brands: data});
 });
 
 /*

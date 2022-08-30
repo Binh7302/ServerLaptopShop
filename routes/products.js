@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+const productController = require('../components/products/controller');
+const brandController = require('../components/brands/controller');
 const authentication = require('../middle/authentication');
 /*
 * http://localhost:3000/products
@@ -10,7 +12,8 @@ const authentication = require('../middle/authentication');
 * date: 29/8/2022
 */
  router.get('', [authentication.checkLogin],async function(req, res, next){
-  res.render('products');
+  const data =  await productController.getProducts();
+  res.render('products', {products: data});
 });
 
 /*

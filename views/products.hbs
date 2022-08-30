@@ -106,7 +106,7 @@
                             <th style="width: 200px;">Tên sản phẩm</th>
                             <th style="width: 80px;">Giá</th>
                             <th style="width: 80px;">Số lượng</th>
-                            <th style="width: 200   px;">Hình ảnh</th>
+                            {{!-- <th style="width: 200   px;">Hình ảnh</th> --}}
                             <th>Nhãn hiệu</th>
                             <th>Trạng thái</th>
                             <th></th>
@@ -120,18 +120,18 @@
                             <td>{{this.name}}</td>
                             <td>{{this.price}}</td>
                             <td>{{this.quantity}}</td>
-                            <td>
+                            {{!-- <td>
                                 <img src="{{this.image}}" width="100" height="100">
-                            </td>
-                            <td>{{this.category.name}}</td>
-                            <td>{{this.release}}</td>
+                            </td> --}}
+                            <td>{{this.brandID.name}}</td>
+                            <td>{{this.status}}</td>
                             <td>
-                                <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons"></i></a>
+                                <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a>
                                 <a class="edit" title="Edit" data-toggle="tooltip" onclick="edit('{{this._id}}')"><i
-                                        class="material-icons"></i></a>
+                                        class="material-icons">edit</i></a>
                                 <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons"
                                         onclick="goDelete('{{this._id}}')" data-toggle="modal"
-                                        data-target="#confirmModal"></i></a>
+                                        data-target="#confirmModal">delete</i></a>
                             </td>
                         </tr>
                         {{/each}}
@@ -155,6 +155,7 @@
 </section>
 
 <script>
+  
   // http://locahost:3000/san-pham/:id/edit
   const edit = (id) => {
     window.location.href = `san-pham/${id}/edit`;

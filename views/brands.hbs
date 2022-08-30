@@ -1,147 +1,144 @@
-<section style="position: static;" id="container">
-    <!-- **********************************************************************************************************************************************************
+<section style="position: relative; min-height: 100%" id="container">
+  <!-- **********************************************************************************************************************************************************
       TOP BAR CONTENT & NOTIFICATIONS
       *********************************************************************************************************************************************************** -->
-    <!--header start-->
-    <header class="header black-bg">
-        <div class="sidebar-toggle-box">
-            <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
-        </div>
-        <!--logo start-->
-        <a href="/products" class="logo"><b>Laptop Shop</b></a>
-        <!--logo end-->
-        <div class="nav notify-row" id="top_menu">
-        </div>
-        <div class="top-menu">
-            <ul class="nav pull-right top-menu">
-                <li><a class="logout" href="/logout">Logout</a></li>
-            </ul>
-        </div>
-    </header>
-    <!--header end-->
+  <!--header start-->
+  <header class="header black-bg">
+    <div class="sidebar-toggle-box">
+      <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+    </div>
+    <!--logo start-->
+    <a href="/products" class="logo"><b>Laptop Shop</b></a>
+    <!--logo end-->
+    <div class="nav notify-row" id="top_menu">
+    </div>
+    <div class="top-menu">
+      <ul class="nav pull-right top-menu">
+        <li><a class="logout" href="/logout">Logout</a></li>
+      </ul>
+    </div>
+  </header>
+  <!--header end-->
 
-    <!-- **********************************************************************************************************************************************************
+  <!-- **********************************************************************************************************************************************************
       MAIN SIDEBAR MENU
       *********************************************************************************************************************************************************** -->
-    <!--sidebar start-->
-    <aside>
-        <div id="sidebar" class="nav-collapse ">
-            <!-- sidebar menu start-->
-            <ul class="sidebar-menu" id="nav-accordion">
+  <!--sidebar start-->
+  <aside>
+    <div id="sidebar" class="nav-collapse ">
+      <!-- sidebar menu start-->
+      <ul class="sidebar-menu" id="nav-accordion">
 
-                <p class="centered"><a href="profile.html"><img src="/images/ui-sam.jpg" class="img-circle"
-                            width="60"></a></p>
-                <h5 class="centered">Marcel Newman</h5>
+        <p class="centered"><a href="profile.html"><img src="/images/ui-sam.jpg" class="img-circle" width="60"></a></p>
+        <h5 class="centered">Marcel Newman</h5>
 
-                <li class="sub-menu">
-                    <a class="active" href="javascript:;">
-                        <i class="fa fa-th"></i>
-                        <span>Danh sách</span>
-                    </a>
-                    <ul class="sub">
-                        <li><a href="/products">Sản phẩm</a></li>
-                        <li class="active"><a href="/brands">Nhãn hiệu</a></li>
-                        <li><a href="/users">Khách hàng</a></li>
-                        <li><a href="/oders">Đơn hàng</a></li>
-                    </ul>
-                </li>
+        <li class="sub-menu">
+          <a class="active" href="javascript:;">
+            <i class="fa fa-th"></i>
+            <span>Danh sách</span>
+          </a>
+          <ul class="sub">
+            <li><a href="/products">Sản phẩm</a></li>
+            <li class="active"><a href="/brands">Nhãn hiệu</a></li>
+            <li><a href="/users">Khách hàng</a></li>
+            <li><a href="/oders">Đơn hàng</a></li>
+          </ul>
+        </li>
 
-                <li class="sub-menu">
-                    <a href="javascript:;">
-                        <i class="fa fa-tasks"></i>
-                        <span>Forms</span>
-                    </a>
-                    <ul class="sub">
-                        <li><a href="/products/add">Thêm sản phẩm</a></li>
-                        <li><a href="/brands/add">Thêm nhãn hiệu</a></li>
-                    </ul>
-                </li>
-                <li class="sub-menu">
-                    <a href="/">
-                        <i class="fa fa-desktop"></i>
-                        <span>Xử lý đơn hàng</span>
-                    </a>
-                </li>
-                <li class="sub-menu">
-                    <a href="javascript:;">
-                        <i class=" fa fa-bar-chart-o"></i>
-                        <span>Thống kê</span>
-                    </a>
-                    <ul class="sub">
-                        <li><a href="/">Mặt hàng bán chạy</a></li>
-                        <li><a href="/">Thông báo</a></li>
-                    </ul>
-                </li>
+        <li class="sub-menu">
+          <a href="javascript:;">
+            <i class="fa fa-tasks"></i>
+            <span>Forms</span>
+          </a>
+          <ul class="sub">
+            <li><a href="/products/add">Thêm sản phẩm</a></li>
+            <li><a href="/brands/add">Thêm nhãn hiệu</a></li>
+          </ul>
+        </li>
+        <li class="sub-menu">
+          <a href="/">
+            <i class="fa fa-desktop"></i>
+            <span>Xử lý đơn hàng</span>
+          </a>
+        </li>
+        <li class="sub-menu">
+          <a href="javascript:;">
+            <i class=" fa fa-bar-chart-o"></i>
+            <span>Thống kê</span>
+          </a>
+          <ul class="sub">
+            <li><a href="/">Mặt hàng bán chạy</a></li>
+            <li><a href="/">Thông báo</a></li>
+          </ul>
+        </li>
 
-            </ul>
-            <!-- sidebar menu end-->
-        </div>
-    </aside>
-    <!--sidebar end-->
+      </ul>
+      <!-- sidebar menu end-->
+    </div>
+  </aside>
+  <!--sidebar end-->
 
-    <!-- **********************************************************************************************************************************************************
+  <!-- **********************************************************************************************************************************************************
       MAIN CONTENT
       *********************************************************************************************************************************************************** -->
-    <!--main content start-->
-    <div style="position: absolute; top: 120px; left: 230px;" class="content" >
-        <div style="width: 600px" class="container">
-            <div class="table-wrapper">
-                <div class="table-title">
-                    <div class="row">
-                        <div class="col-sm-8">
-                            <h2>Danh sách <b>Nhãn hiệu</b></h2>
-                        </div>
-                        <div class="col-sm-4">
-                            <button type="button" onclick="addnew()" class="btn btn-info add-new"><i
-                                    class="fa fa-plus"></i> Add
-                                New</button>
-                        </div>
-                    </div>
-                </div>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th style="width: 40px;">STT</th>
-                            <th style="width: 200px;">Tên nhãn hiệu</th>
-                            <th style="width: 200px;">Hình ảnh</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {{#each brands}}
-                        <tr>
-                            <td>{{this.index}}</td>
-                            <td>{{this.name}}</td>
-                            <td>
-                                <img src="{{this.image}}" width="100" height="100">
-                            </td>
-                            <td>
-                                <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons"></i></a>
-                                <a class="edit" title="Edit" data-toggle="tooltip" onclick="edit('{{this._id}}')"><i
-                                        class="material-icons"></i></a>
-                                <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons"
-                                        onclick="goDelete('{{this._id}}')" data-toggle="modal"
-                                        data-target="#confirmModal"></i></a>
-                            </td>
-                        </tr>
-                        {{/each}}
-                    </tbody>
-                </table>
+  <!--main content start-->
+    <div style=" position: absolute; top: 120px; left: 250px;" class="content">
+      <div style="width: 500px" class="container">
+        <div class="table-wrapper">
+          <div class="table-title">
+            <div class="row">
+              <div class="col-sm-8">
+                <h2>Danh sách <b>Nhãn hiệu</b></h2>
+              </div>
+              <div class="col-sm-4">
+                <button type="button" onclick="addnew()" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add
+                  New</button>
+              </div>
             </div>
+          </div>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th style="width: 40px;">STT</th>
+                <th style="width: 150px;">Tên nhãn hiệu</th>
+                <th style="width: 150px;">Hình ảnh</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each brands}}
+              <tr>
+                <td>{{this.index}}</td>
+                <td>{{this.name}}</td>
+                <td>
+                  <img src="{{this.image}}" width="125" height="130">
+                </td>
+                <td>
+                  <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a>
+                  <a class="edit" title="Edit" data-toggle="tooltip" onclick="edit('{{this._id}}')"><i
+                      class="material-icons">edit</i></a>
+                  <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons"
+                      onclick="goDelete('{{this._id}}')" data-toggle="modal" data-target="#confirmModal">delete</i></a>
+                </td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
         </div>
+      </div>
     </div>
 
-    <!--main content end-->
-    <!--footer start-->
-    <footer style="position: fixed; bottom: 0; left: 210px; width: 1223px" class="site-footer">
-        <div class="text-center">
-          2014 - Alvarez.is
-          <a href="index.html#" class="go-top">
-            <i class="fa fa-angle-up"></i>
-          </a>
-        </div>
-      </footer>
-    <!--footer end-->
+  <!--main content end-->
+  <!--footer start-->
+  <footer style="position: fixed; bottom: 0; left: 210px; width: 1224px;" class="site-footer">
+    <div class="text-center">
+      2014 - Alvarez.is
+      <a href="index.html#" class="go-top">
+        <i class="fa fa-angle-up"></i>
+      </a>
+    </div>
+  </footer>
+  <!--footer end-->
 </section>
 
 <script>
