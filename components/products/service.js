@@ -5,7 +5,7 @@ const productModel = require('./model');
 //Lấy thông tin danh sách sản phẩm
 exports.getProducts = async () => {
   // return data;
-  const products = await productModel.find().populate('brandID');
+  const products = await productModel.find().populate('brand');
   return products;
 }
 
@@ -14,7 +14,7 @@ exports.getProducts = async () => {
 exports.getProductById = async (id) => {
   // const product = data.filter(item => item._id == id)[0];
   // return product;
-  const product = await productModel.findById(id).populate('brandID');
+  const product = await productModel.findById(id).populate('brand');
   return product;
 }
 

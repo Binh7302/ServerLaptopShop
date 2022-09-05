@@ -9,8 +9,9 @@ exports.getProducts = async () => {
             price: item.price,
             quantity: item.quantity,
             description: item.description,
-            brandID: item.brandID,
+            brand: item.brand,
             status: item.status,
+            image: item.image,
             index: index + 1,
         }
         return item;
@@ -27,7 +28,8 @@ exports.getProductById = async(id) =>{
         quantity: product.quantity,
         description: product.description,
         brand: product.brand,
-        status: product.status
+        status: product.status,
+        image: product.image
     }
     return product;
 }

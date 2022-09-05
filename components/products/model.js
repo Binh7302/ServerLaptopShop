@@ -6,10 +6,11 @@ const productSchema = new Schema({
     id: { type: ObjectId },
     name: { type: String },
     price: { type: Number },
-    brandID: { type: Schema.Types.ObjectId, ref: 'brand' },
+    brand: { type: Schema.Types.ObjectId, ref: 'brand' },
     quantity: { type: Number },
     description: { type: String },
     status: { type: Number },
+    image: { type: String },
 });
 
 module.exports = mongoose.model('product', productSchema);

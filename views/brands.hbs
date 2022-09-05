@@ -82,6 +82,7 @@
       MAIN CONTENT
       *********************************************************************************************************************************************************** -->
   <!--main content start-->
+  
     <div style=" position: absolute; top: 120px; left: 250px;" class="content">
       <div style="width: 500px" class="container">
         <div class="table-wrapper">
@@ -114,7 +115,6 @@
                   <img src="{{this.image}}" width="125" height="130">
                 </td>
                 <td>
-                  <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">add</i></a>
                   <a class="edit" title="Edit" data-toggle="tooltip" onclick="edit('{{this._id}}')"><i
                       class="material-icons">edit</i></a>
                   <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons"
@@ -130,21 +130,21 @@
 
   <!--main content end-->
   <!--footer start-->
-  <footer style="position: fixed; bottom: 0; left: 210px; width: 1224px;" class="site-footer">
+  {{!-- <footer style="position: fixed; bottom: 0; left: 210px; width: 1224px;" class="site-footer">
     <div class="text-center">
       2014 - Alvarez.is
       <a href="index.html#" class="go-top">
         <i class="fa fa-angle-up"></i>
       </a>
     </div>
-  </footer>
+  </footer> --}}
   <!--footer end-->
 </section>
 
 <script>
-  // http://locahost:3000/san-pham/:id/edit
+  // http://locahost:3000/brands/:id/edit
   const edit = (id) => {
-    window.location.href = `san-pham/${id}/edit`;
+    window.location.href = `brands/${id}/edit`;
 
   }
 
@@ -164,14 +164,14 @@
   }
 
   const onDelete = async () => {
-    const url = `https://bumbled-mob402.herokuapp.com/san-pham/${deleted_id}/delete`;
+    const url = `http://localhost:3000/brands/${deleted_id}/delete`;
     const option = {
       method: 'delete',
       headers: { 'Content-Type': 'application/json' }
     }
     try {
       await fetchAPI(url, option);
-      window.location.href = '/san-pham';
+      window.location.href = '/brands';
     } catch (e) { console.log('Delete error: ', e) }
 
   }
