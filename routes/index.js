@@ -33,7 +33,7 @@ const authentication = require('../middle/authentication');
   console.log(result+" check");
   if(result) {
     // secret key
-    const token = jwt.sign({ id: result._id, username: result.username }, 'admin')
+    const token = jwt.sign({ id: result._id, username: result.username }, 'admin', {expiresIn: '20m'})
     req.session.token = token;
     // nếu đúng chuyển qua trang sản phẩm
     res.redirect('/products');

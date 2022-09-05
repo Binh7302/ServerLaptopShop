@@ -8,8 +8,9 @@ const userSchema = new Schema({
     role: { type: Number},
     password: { type: String},
     name: { type: String },
-    email: { type: String},
+    email: { type: String },
     phonenumber: { type: String },
+    resetLink: { type: String, required: true}
 });
 
 module.exports = mongoose.model('user', userSchema);

@@ -42,7 +42,7 @@
 		            <input name="password" type="password" class="form-control" placeholder="Password">
 		            <label class="checkbox">
 		                <span class="pull-right">
-		                    <a data-toggle="modal" href="#"> Forgot Password?</a>
+		                    <a data-toggle="modal" href="login.html#myModal"> Forgot Password?</a>
 		
 		                </span>
 		            </label>
@@ -51,8 +51,8 @@
 		            
 		            <div class="login-social-link centered">
 		            <p>Or you can sign in via your social network</p>
-		                <button class="btn btn-facebook" type="submit"><i class="fa fa-facebook"></i> Facebook</button>
 		                <button class="btn btn-twitter" type="submit"><i class="fa fa-twitter"></i> Twitter</button>
+                        <button class="btn btn-facebook" type="submit"><i class="fa fa-facebook"></i> Facebook</button>
 		            </div>
 		            <div class="registration">
 		                Don't have an account yet?<br/>
@@ -64,25 +64,27 @@
 		        </div>
 		
 		          <!-- Modal -->
-		          <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
-		              <div class="modal-dialog">
-		                  <div class="modal-content">
-		                      <div class="modal-header">
-		                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		                          <h4 class="modal-title">Forgot Password ?</h4>
-		                      </div>
-		                      <div class="modal-body">
-		                          <p>Enter your e-mail address below to reset your password.</p>
-		                          <input type="text" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
-		
-		                      </div>
-		                      <div class="modal-footer">
-		                          <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
-		                          <button class="btn btn-theme" type="button">Submit</button>
-		                      </div>
-		                  </div>
-		              </div>
-		          </div>
+                  <form class="form-login" action="/users/forgotPassword" method="post" role="form">
+                    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title">Forgot Password ?</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Enter your e-mail address below to reset your password.</p>
+                                    <input name="email" type="text" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
+            
+                                </div>
+                                <div class="modal-footer">
+                                    <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
+                                    <button class="btn btn-theme" type="submit">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </form>
 		          <!-- modal -->
 		
 		      </form>	  	
