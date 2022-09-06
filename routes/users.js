@@ -25,7 +25,9 @@ const userController = require('../components/users/controller');
  */
 router.post('/forgotPassword', async function(req, res, next){
   const email = req.body.email;
-  await userController.forgotPassword(email);
+  const result = await userController.forgotPassword(email);
+  console.log("result forgotPassword: " + result);
+  return result;
 });
 
 /**
@@ -37,7 +39,9 @@ router.post('/forgotPassword', async function(req, res, next){
  */
 router.post('/resetPassword', async function(req, res, next){
   const { resetLink, newPass} = req.body;
-  await userController.resetPassword(resetLink, newPass);
+  const result = await userController.resetPassword(resetLink, newPass);
+  console.log("result resetPassword: " + result);
+  return result;
 });
 
 module.exports = router;

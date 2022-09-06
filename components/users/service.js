@@ -18,14 +18,12 @@ exports.registerUser = async (username, password, name, email, phonenumber) => {
 }
 
 exports.updateLink = async (email, link) => {
-    console.log("check link: " + link, " email: " + email);
     const user = await userModel.findOne({ email: email },  'id username role password name email phonenumber');
-    console.log("check user: " + user );
     await user.updateOne({ resetLink: link });
 }
 
-exports.forgotPassword = async (email) => {
-    const user = await userModel.findOne({ email: email },  'id username role password name email phonenumber');
+exports.findUserByEmail = async (email) => {
+    const user = await userModel.findOne({ email: email },  'id username role password name email phonenumber resetLink');
     return user;
 }
 

@@ -10,7 +10,7 @@ const userSchema = new Schema({
     name: { type: String },
     email: { type: String },
     phonenumber: { type: String },
-    resetLink: { type: String, required: true}
+    resetLink: { type: String}
 });
 
 module.exports = mongoose.model('user', userSchema);

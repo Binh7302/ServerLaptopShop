@@ -55,28 +55,65 @@ exports.registerUser = async (username, password, confirm_password, name, email,
 
 //controller quên mật khẩu
 exports.forgotPassword = async (email) => {
-    const user = await userService.forgotPassword(email);
-    if(!user) return null;
-    const token = jwt.sign({ id: user._id }, 'admin', {expiresIn: '20m'});
-    const data = {
-        from: 'laptopshop@gmail.com',
-	    to: email,
-	    subject: 'Reset Passwords',
-	    html: `
-            <h2>Please click on the given link to reset your password</h2>
-            <p>${'http://localhost:3000'}/users/forgotPassword/${token}</p>
-        `
-    };
-    userService.updateLink(email, token);
-    mg.messages().send(data, function (error, body) {
-        console.log(error);
-        console.log(body);
-    });
+    const user = await userService.findUserByEmail(email);
+    // bắt lỗi không tìm thấy user
+    if(!user) return 'User not found';
+    // bắt lỗi khi token resetLink còn hạn sử dụng
+    console.log("resetLink: "+ user.resetLink);
+    if(!user.resetLink){
+        const token = await jwt.sign({ id: user._id }, 'admin', {expiresIn: '5m'});
+            const data = {
+                from: 'laptopshop@gmail.com',
+                to: email,
+                subject: 'Reset Passwords',
+                html: `
+                    <h2>This link just expires in 5 minutes. Please click on the given link to reset your password</h2>
+                    <p>${'http://localhost:3000'}/users/forgotPassword/${token}</p>
+                `
+            };
+            userService.updateLink(email, token);
+            mg.messages().send(data, function (error, body) {
+                console.log(error);
+                console.log(body);
+            });
+            return 'link reset password is created successfully';
+    } else {
+        await jwt.verify(user.resetLink, 'admin', async function (error, decoded) {
+            console.log("error1: "+ error);
+            if(error != null) {
+                const token = await jwt.sign({ id: user._id }, 'admin', {expiresIn: '5m'});
+                const data = {
+                    from: 'laptopshop@gmail.com',
+                    to: email,
+                    subject: 'Reset Passwords',
+                    html: `
+                        <h2>This link just expires in 5 minutes. Please click on the given link to reset your password</h2>
+                        <p>${'http://localhost:3000'}/users/forgotPassword/${token}</p>
+                    `
+                };
+                userService.updateLink(email, token);
+                mg.messages().send(data, function (error, body) {
+                    console.log(error);
+                    console.log(body);
+                });
+                return 'link reset password is created successfully';
+            } else {
+                return 'Link reset password has already been sent to your email address';
+            }
+        });
+    }
 }
 
 // controller reset password
 exports.resetPassword = async (resetLink, newPass) => {
-    const user = await userService.findUserByResetLink(resetLink);
-    const hash = await bcrypt.hash(newPass, await bcrypt.genSalt(10));
-    await user.updateOne({password: hash});
+    jwt.verify(resetLink, 'admin', async function (error, decoded) {
+        if (error) {
+            return false;
+        } else {
+            const user = await userService.findUserByResetLink(resetLink);
+            const hash = await bcrypt.hash(newPass, await bcrypt.genSalt(10));
+            await user.updateOne({password: hash});
+            return true;
+        }
+    })
 }
