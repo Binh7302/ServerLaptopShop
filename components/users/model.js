@@ -6,9 +6,9 @@ const userSchema = new Schema({
     id: { type: ObjectId },
     username: { type: String, required: true },
     role: { type: Number},
-    password: { type: String},
+    password: { type: String, required: true},
     name: { type: String },
-    email: { type: String },
+    email: { type: String, required: true },
     phonenumber: { type: String },
     resetLink: { type: String}
 });

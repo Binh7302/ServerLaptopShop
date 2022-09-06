@@ -8,17 +8,17 @@ exports.login = async (username) => {
 }
 
 exports.registerAdmin = async (username, password, name, email, phonenumber) => {
-    const user = new userModel({ username, role: 1 , password, name, email, phonenumber });
+    const user = new userModel({ username, role: 1 , password, name, email, phonenumber, actived: false });
     return await user.save();
 }
 
 exports.registerUser = async (username, password, name, email, phonenumber) => {
-    const user = new userModel({ username, role: 0, password, name, email, phonenumber });
+    const user = new userModel({ username, role: 0, password, name, email, phonenumber, actived: false });
     return await user.save();
 }
 
 exports.updateLink = async (email, link) => {
-    const user = await userModel.findOne({ email: email },  'id username role password name email phonenumber');
+    const user = await userModel.findOne({ email: email },  'id username role password name email phonenumber resetLink');
     await user.updateOne({ resetLink: link });
 }
 

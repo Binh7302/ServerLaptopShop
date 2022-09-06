@@ -81,7 +81,7 @@ const authentication = require('../middle/authentication');
 
   // thực hiện kiểm tra đăng nhập
   const result = await userController.registerAdmin(username, password, confirm_password, name, email, phonnumber);
-  if(result) {
+  if(result != null) {
     // nếu đúng chuyển qua trang đăng nhập
     res.redirect('/login');
   } else {
