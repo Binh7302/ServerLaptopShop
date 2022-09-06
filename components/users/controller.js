@@ -20,7 +20,6 @@ exports.loginWeb = async (username, password) => {
     const user = await userService.login(username);
     if (!user) return null;
     if (user.role != 1) return null;
-    if(user.actived == false) return null;
     const checkPassword = await bcrypt.compare(password, user.password);
     if (!checkPassword) return null;
     return { _id: user._id, username: user.username }
@@ -29,7 +28,6 @@ exports.loginWeb = async (username, password) => {
 exports.loginApp = async (username, password) => {
     const user = await userService.login(username);
     if (!user) return null;
-    if(user.actived == false) return null;
     const checkPassword = await bcrypt.compare(password, user.password);
     if (!checkPassword) return null;
     return { _id: user._id, username: user.username }
@@ -37,13 +35,13 @@ exports.loginApp = async (username, password) => {
 
 // controller đăng kí
 exports.registerAdmin = async (username, password, confirm_password, name, email, phonenumber) => {
-    //bắt lỗi
+    // bắt lỗi
     if (password != confirm_password) return null;
     let user1 = await userService.login(username);
     if (user1) return null;
     let user2 = await userService.findUserByEmail(email);
     if (user2) return null;
-    // 
+    // tạo link gửi về email để kích hoạt tài khoản
     const token = await jwt.sign({ username: username, password: password, name: name, email: email, phonenumber: phonenumber}, 'activeAccount', { expiresIn: '5m' });
     const data = {
         from: 'laptopshop@gmail.com',
@@ -62,12 +60,14 @@ exports.registerAdmin = async (username, password, confirm_password, name, email
 }
 
 exports.registerUser = async (username, password, confirm_password, name, email, phonenumber) => {
+    // bắt lỗi
     if (password != confirm_password) return null;
     let user = await userService.login(username);
     if (user) return null;
     let user2 = await userService.findByEmail(email);
     if (user2) return null;
 
+    //tạo link gửi về email để kích hoạt tài khoản
     const token = await jwt.sign({ username: username, password: password, name: name, email: email, phonenumber: phonenumber}, 'activeAccount', { expiresIn: '5m' });
     const data = {
         from: 'laptopshop@gmail.com',
