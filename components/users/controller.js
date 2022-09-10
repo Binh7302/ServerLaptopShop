@@ -67,22 +67,9 @@ exports.registerUser = async (username, password, confirm_password, name, email,
     let user2 = await userService.findByEmail(email);
     if (user2) return null;
 
-    //tạo link gửi về email để kích hoạt tài khoản
-    const token = await jwt.sign({ username: username, password: password, name: name, email: email, phonenumber: phonenumber}, 'activeAccount', { expiresIn: '5m' });
-    const data = {
-        from: 'laptopshop@gmail.com',
-        to: email,
-        subject: 'Active Your Account',
-        html: `
-                    <h2>This link just expires in 5 minutes. Please click on the given link to acctive your account</h2>
-                    <p>${'http://localhost:3000'}/users/activeAccount/${token}</p>
-                `
-    };
-    mg.messages().send(data, function (error, body) {
-        console.log(error);
-        console.log(body);
-    });
-    return 'Active account link has been sent successfully to your email address';
+    const hash = await bcrypt.hash(password, await bcrypt.genSalt(10));
+    user = await userService.registerAdmin(username, hash, name, email, phonenumber);
+    return { _id: user._id };
 }
 
 //controller quên mật khẩu
@@ -100,7 +87,8 @@ exports.forgotPassword = async (email) => {
             subject: 'Reset Passwords',
             html: `
                     <h2>This link just expires in 5 minutes. Please click on the given link to reset your password</h2>
-                    <p>${'http://localhost:3000'}/users/forgotPassword/${token}</p>
+                    <h3>Here your token to reset password: ${token}</h3>
+                    <p>${'http://localhost:3000'}/users/resetPassword</p>
                 `
         };
         userService.updateLink(email, token);
@@ -120,7 +108,8 @@ exports.forgotPassword = async (email) => {
                     subject: 'Reset Passwords',
                     html: `
                         <h2>This link just expires in 5 minutes. Please click on the given link to reset your password</h2>
-                        <p>${'http://localhost:3000'}/users/forgotPassword/${token}</p>
+                        <h3>Here your token to reset password: ${token}</h3>
+                        <p>${'http://localhost:3000'}/users/resetPassword</p>
                     `
                 };
                 userService.updateLink(email, token);
@@ -137,18 +126,22 @@ exports.forgotPassword = async (email) => {
 }
 
 // controller reset password
-exports.resetPassword = async (resetLink, newPass) => {
-    jwt.verify(resetLink, 'admin', async function (error, decoded) {
-        console.log("error2 " + error);
-        if (error != null) {
-            return false;
-        } else {
-            const user = await userService.findUserByResetLink(resetLink);
-            const hash = await bcrypt.hash(newPass, await bcrypt.genSalt(10));
-            await user.updateOne({ password: hash });
-            return true;
-        }
-    })
+exports.resetPassword = async (resetLink, newPass, confirmedPass) => {
+    if(newPass != confirmedPass){
+        return false;
+    } else {
+        jwt.verify(resetLink, 'admin', async function (error, decoded) {
+            console.log("error2 " + error);
+            if (error != null) {
+                return false;
+            } else {
+                const user = await userService.findUserByResetLink(resetLink);
+                const hash = await bcrypt.hash(newPass, await bcrypt.genSalt(10));
+                await user.updateOne({ password: hash });
+                return true;
+            }
+        })
+    }
 }
 
 //controller active account
