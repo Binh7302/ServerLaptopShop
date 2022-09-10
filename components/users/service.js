@@ -31,3 +31,10 @@ exports.findUserByResetLink = async (resetLink) => {
     const user = await userModel.findOne({ resetLink: resetLink });
     return user;
 }
+
+//Lấy thông tin danh sách user
+exports.getUsers = async () => {
+    const users = await userModel.find();
+    return users;
+}
+

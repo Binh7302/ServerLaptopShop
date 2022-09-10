@@ -180,3 +180,20 @@ exports.activeUserAccount = async (token) => {
         return false;
     }
 }
+
+// Lấy danh sách user
+exports.getUsers = async () => {
+    let data = await userService.getUsers();
+    data = data.filter(item => item.role != 1);
+    data = data.map((item,index) => {
+        item = {
+            _id: item._id,
+            name: item.name,       
+            email: item.email,
+            phonenumber: item.phonenumber,
+            index: index + 1,
+        }
+        return item;
+    });
+    return data;
+}

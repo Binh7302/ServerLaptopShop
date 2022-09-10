@@ -13,7 +13,9 @@ const userController = require('../components/users/controller');
 * date: 29/8/2022
  */
  router.get('', [authentication.checkLogin],async function(req, res, next){
-  res.render('users');
+   //lấy danh sách user từ database
+   const data = await userController.getUsers();
+  res.render('users', {users: data});
 });
 
 /**
@@ -58,7 +60,7 @@ router.post('/activeAdminAccount/:token', async function(req, res, next){
 });
 
 /**
- * http://localhost:3000/users/activeAdminAccount/:token
+ * http://localhost:3000/users/activeUserAccount/:token
 * method: post
 * detail: kích hoạt tài khoản user
 * author: Phát
