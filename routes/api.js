@@ -99,8 +99,8 @@ router.post("/add-cartDetail/", apiController.addCartDetail);
 router.get("/get-one-cart/:cartID/", apiController.getOneCart);
 
 // lay ds cart cho ds lich su mua hang
-// http://localhost:3000/api/get-all-cart/
-router.get("/get-all-cart/", apiController.getAllCart);
+// http://localhost:3000/api/get-all-cart/ userID
+router.get("/get-all-cart/:userID", apiController.getAllCart);
 
 // lay ds cartDetail theo cartID
 // http://localhost:3000/api/get-all-cartDetail/ idcart

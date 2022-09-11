@@ -173,7 +173,7 @@ const apiController = {
     // lay tat ca cart cho ds lich su mua hang
     getAllCart: async (req, res) => {
         try {
-            const carts = await Cart.find();
+            const carts = await Cart.find({userID: req.params.userID});
             res.status(200).json(carts);
         } catch (err) {
             res.status(500).json(err);
