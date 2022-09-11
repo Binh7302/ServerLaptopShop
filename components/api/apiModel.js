@@ -34,7 +34,7 @@ const cartSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'users' 
     },
-    adress: {
+    address: {
         type: String
     },
     status: {
