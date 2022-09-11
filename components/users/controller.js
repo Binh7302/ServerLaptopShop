@@ -49,7 +49,7 @@ exports.registerAdmin = async (username, password, confirm_password, name, email
         subject: 'Active Your Account',
         html: `
                     <h2>This link just expires in 5 minutes. Please click on the given link to acctive your account</h2>
-                    <p>${'http://localhost:3000'}/users/activeAccount/${token}</p>
+                    <p>${'http://localhost:3000'}/users/activeAdminAccount/${token}</p>
                 `
     };
     mg.messages().send(data, function (error, body) {
@@ -80,7 +80,7 @@ exports.forgotPassword = async (email) => {
     // bắt lỗi khi token resetLink còn hạn sử dụng
     console.log("resetLink: " + user.resetLink);
     if (!user.resetLink) {
-        const token = await jwt.sign({ id: user._id }, 'admin', { expiresIn: '5m' });
+        const token = await jwt.sign({ id: user._id }, 'forgot', { expiresIn: '5m' });
         const data = {
             from: 'laptopshop@gmail.com',
             to: email,
@@ -98,7 +98,7 @@ exports.forgotPassword = async (email) => {
         });
         return 'link reset password is created successfully';
     } else {
-        await jwt.verify(user.resetLink, 'admin', async function (error, decoded) {
+        await jwt.verify(user.resetLink, 'forgot', async function (error, decoded) {
             console.log("error1: " + error);
             if (error != null) {
                 const token = await jwt.sign({ id: user._id }, 'admin', { expiresIn: '5m' });
@@ -130,7 +130,7 @@ exports.resetPassword = async (resetLink, newPass, confirmedPass) => {
     if(newPass != confirmedPass){
         return false;
     } else {
-        jwt.verify(resetLink, 'admin', async function (error, decoded) {
+        jwt.verify(resetLink, 'forgot', async function (error, decoded) {
             console.log("error2 " + error);
             if (error != null) {
                 return false;
@@ -152,21 +152,6 @@ exports.activeAdminAccount = async (token) => {
             const {username, password, email, phonenumber, name} = decoded;
             const hash = await bcrypt.hash(password, await bcrypt.genSalt(10));
             user = await userService.registerAdmin(username, hash, name, email, phonenumber);
-            return { _id: user._id };
-        })
-    } else {
-        return false;
-    }
-}
-
-//controller active account
-exports.activeUserAccount = async (token) => {
-    console.log(token);
-    if(token) {
-        jwt.verify(token, 'activeAccount', async function(err, decoded){
-            const {username, password, email, phonenumber, name} = decoded;
-            const hash = await bcrypt.hash(password, await bcrypt.genSalt(10));
-            user = await userService.registerUser(username, hash, name, email, phonenumber);
             return { _id: user._id };
         })
     } else {
