@@ -78,8 +78,8 @@ const userSchema = new mongoose.Schema({
 let Product = mongoose.model("products", productSchema);
 let Brand = mongoose.model("brands", brandSchema);
 let Image = mongoose.model("images", imageSchema);
-let Cart = mongoose.model("cart", cartSchema);
-let CartDetail = mongoose.model("cartDetail", cartDetailtSchema);
+let Cart = mongoose.model("carts", cartSchema);
+let CartDetail = mongoose.model("cartDetails", cartDetailtSchema);
 let User = mongoose.model("users", userSchema);
 
 

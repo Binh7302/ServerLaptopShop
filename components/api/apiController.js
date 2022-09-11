@@ -3,6 +3,7 @@ const { Image } = require("../api/apiModel");
 const { Brand } = require("../api/apiModel");
 const { Cart } = require("../api/apiModel");
 const { CartDetail } = require("../api/apiModel");
+const bcrypt = require('bcryptjs');
 
 
 const apiController = {
