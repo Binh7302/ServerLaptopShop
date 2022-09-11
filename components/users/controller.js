@@ -64,11 +64,11 @@ exports.registerUser = async (username, password, confirm_password, name, email,
     if (password != confirm_password) return null;
     let user = await userService.login(username);
     if (user) return null;
-    let user2 = await userService.findByEmail(email);
+    let user2 = await userService.findUserByEmail(email);
     if (user2) return null;
 
     const hash = await bcrypt.hash(password, await bcrypt.genSalt(10));
-    user = await userService.registerAdmin(username, hash, name, email, phonenumber);
+    user = await userService.registerUser(username, hash, name, email, phonenumber);
     return { _id: user._id };
 }
 
