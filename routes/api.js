@@ -61,5 +61,29 @@ router.get("/get-product-search/", apiController.getSearchProduct);
 // http://localhost:3000/api/get-one-brand/idbrand
 router.get("/get-one-brand/:brandID/", apiController.getOneBrand);
 
+
+// lay ds sp theo brandID
+// http://localhost:3000/api/get-product-by-brand/idbrand
+router.get("/get-product-by-brandID/:brandID/", apiController.getProductByBrandID);
+
+// lay 1 brand
+// http://localhost:3000/api/get-all-brand/
+router.get("/get-all-brand/", apiController.getAllBrand);
+
+// tim kiem
+// http://localhost:3000/api/get-product-search-with-brandID/:brandID?search=tênsảnphẩm
+router.get("/get-product-search-with-brandID/:brandID/", apiController.getSearchProductWithBrand);
+
+// tim user theo username
+// http://localhost:3000/api/get-user-by-username?username=
+router.get("/get-user-by-username", apiController.getOneUserByUsername);
+
+// cap nhat user
+// http://localhost:3000/api/update-user/:id
+router.put("/update-user/:id", apiController.updateUser);
+
+// doi mat khau
+// http://localhost:3000/api/update-user-pass/:id
+router.put("/update-user-pass/:id", apiController.updatePass);
  
 module.exports = router;

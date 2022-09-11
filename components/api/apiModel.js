@@ -62,10 +62,22 @@ const cartDetailtSchema = new mongoose.Schema({
     }
 });
 
+const userSchema = new mongoose.Schema({
+    username: { type: String, required: true },
+    role: { type: Number},
+    password: { type: String, required: true},
+    name: { type: String },
+    email: { type: String, required: true },
+    phonenumber: { type: String },
+    resetLink: { type: String}
+});
+
 let Product = mongoose.model("products", productSchema);
 let Brand = mongoose.model("brands", brandSchema);
 let Image = mongoose.model("images", imageSchema);
 let Cart = mongoose.model("cart", cartSchema);
 let CartDetail = mongoose.model("cartDetail", cartDetailtSchema);
+let User = mongoose.model("users", userSchema);
 
-module.exports = { Product, Cart, CartDetail, Brand, Image };
+
+module.exports = { Product, Cart, CartDetail, Brand, Image, User };
