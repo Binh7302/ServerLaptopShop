@@ -40,6 +40,9 @@ const cartSchema = new mongoose.Schema({
     status: {
         type: Number
     },
+    total: {
+        type: Number
+    },
     createAt: {
         type: Date
     }
