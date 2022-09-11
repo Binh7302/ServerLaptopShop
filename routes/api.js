@@ -66,7 +66,7 @@ router.get("/get-one-brand/:brandID/", apiController.getOneBrand);
 // http://localhost:3000/api/get-product-by-brand/idbrand
 router.get("/get-product-by-brandID/:brandID/", apiController.getProductByBrandID);
 
-// lay 1 brand
+// lay ds brand
 // http://localhost:3000/api/get-all-brand/
 router.get("/get-all-brand/", apiController.getAllBrand);
 
@@ -85,5 +85,25 @@ router.put("/update-user/:id", apiController.updateUser);
 // doi mat khau
 // http://localhost:3000/api/update-user-pass/:id
 router.put("/update-user-pass/:id", apiController.updatePass);
+
+// them moi cart
+// http://localhost:3000/api/add-cart/
+router.post("/add-cart/", apiController.addCart);
+
+// them moi cartDetail
+// http://localhost:3000/api/add-cartDetail/
+router.post("/add-cartDetail/", apiController.addCartDetail);
+
+// lay 1 cat theo id
+// http://localhost:3000/api/get-one-cart/ idcart
+router.get("/get-one-cart/:cartID/", apiController.getOneCart);
+
+// lay ds cart cho ds lich su mua hang
+// http://localhost:3000/api/get-all-cart/
+router.get("/get-all-cart/", apiController.getAllCart);
+
+// lay ds cartDetail theo cartID
+// http://localhost:3000/api/get-all-cartDetail/ idcart
+router.get("/get-all-cartDetail/:cartID/", apiController.getAllCartDetail);
  
 module.exports = router;

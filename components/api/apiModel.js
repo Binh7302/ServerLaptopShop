@@ -30,7 +30,7 @@ const imageSchema = new mongoose.Schema({
 });
 
 const cartSchema = new mongoose.Schema({
-    UserID: { 
+    userID: { 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'users' 
     },
@@ -40,9 +40,9 @@ const cartSchema = new mongoose.Schema({
     status: {
         type: Number
     },
-    // createAt: {
-    //     type: Date
-    // }
+    createAt: {
+        type: Date
+    }
 });
 
 const cartDetailtSchema = new mongoose.Schema({
