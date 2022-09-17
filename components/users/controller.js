@@ -42,7 +42,7 @@ exports.registerAdmin = async (username, password, confirm_password, name, email
     let user2 = await userService.findUserByEmail(email);
     if (user2) return null;
     // tạo link gửi về email để kích hoạt tài khoản
-    const token = await jwt.sign({ username: username, password: password, name: name, email: email, phonenumber: phonenumber}, 'activeAccount', { expiresIn: '5m' });
+    const token = await jwt.sign({ username: username, password: password, name: name, email: email, phonenumber: phonenumber }, 'activeAccount', { expiresIn: '5m' });
     const data = {
         from: 'laptopshop@gmail.com',
         to: email,
@@ -127,7 +127,7 @@ exports.forgotPassword = async (email) => {
 
 // controller reset password
 exports.resetPassword = async (resetLink, newPass, confirmedPass) => {
-    if(newPass != confirmedPass){
+    if (newPass != confirmedPass) {
         return false;
     } else {
         jwt.verify(resetLink, 'forgot', async function (error, decoded) {
@@ -147,9 +147,9 @@ exports.resetPassword = async (resetLink, newPass, confirmedPass) => {
 //controller active account
 exports.activeAdminAccount = async (token) => {
     console.log(token);
-    if(token) {
-        jwt.verify(token, 'activeAccount', async function(err, decoded){
-            const {username, password, email, phonenumber, name} = decoded;
+    if (token) {
+        jwt.verify(token, 'activeAccount', async function (err, decoded) {
+            const { username, password, email, phonenumber, name } = decoded;
             const hash = await bcrypt.hash(password, await bcrypt.genSalt(10));
             user = await userService.registerAdmin(username, hash, name, email, phonenumber);
             return { _id: user._id };
@@ -163,10 +163,10 @@ exports.activeAdminAccount = async (token) => {
 exports.getUsers = async () => {
     let data = await userService.getUsers();
     data = data.filter(item => item.role != 1);
-    data = data.map((item,index) => {
+    data = data.map((item, index) => {
         item = {
             _id: item._id,
-            name: item.name,       
+            name: item.name,
             email: item.email,
             phonenumber: item.phonenumber,
             index: index + 1,
@@ -174,4 +174,16 @@ exports.getUsers = async () => {
         return item;
     });
     return data;
+}
+
+// Lấy thông tin khách hàng theo id 
+exports.getUsersById = async (id) => {
+    let user = await userService.getUsersById(id);
+    user = {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        phonenumber: user.phonenumber,
+    }
+    return user;
 }

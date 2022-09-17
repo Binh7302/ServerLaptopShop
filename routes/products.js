@@ -63,6 +63,7 @@ router.get('/:id/edit',[authentication.checkLogin], async function (req, res, ne
   const { id } = req.params;
   const product = await productController.getProductById(id);
   const brand = await brandController.getBrandsForOneProduct(product.brand._id);
+  console.log(product, brand);
   res.render('detail_product', {product: product,brand: brand});
 });
 
@@ -82,6 +83,7 @@ router.post('/:id/edit', [upload.single('image'),authentication.checkLogin], asy
     let image = `http://192.168.1.253:3000/images/${file.filename}`;
     body = { ...body, image: image };
   }
+  console.log(params.id, body);
   await productController.update(params.id, body);
   res.redirect('/products');
 });

@@ -56,7 +56,7 @@
           </ul>
         </li>
         <li class="sub-menu">
-          <a href="/">
+          <a href="/oders/odersProcessing">
             <i class="fa fa-desktop"></i>
             <span>Xử lý đơn hàng</span>
           </a>
@@ -96,29 +96,29 @@
               <div class="form-group">
                 <label class="col-sm-2 col-sm-2 control-label">Tên sản phẩm</label>
                 <div class="col-sm-10">
-                  <input type="text" onchange="validation()" class="form-control" type="text" name="name" id="name" value="{{product.name}}"
-                    placeholder="Tên sản phẩm">
+                  <input type="text" onchange="validation()" class="form-control" type="text" name="name" id="name"
+                    value="{{product.name}}" placeholder="Tên sản phẩm">
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-2 col-sm-2 control-label">Giá</label>
                 <div class="col-sm-10">
-                  <input type="text" onchange="validation()" class="form-control" type="text" name="price" id="price" value="{{product.price}}"
-                    placeholder="Giá">
+                  <input type="text" onchange="validation()" class="form-control" type="text" name="price" id="price"
+                    value="{{product.price}}" placeholder="Giá">
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-2 col-sm-2 control-label">Số lượng</label>
                 <div class="col-sm-10">
-                  <input type="text" onchange="validation()" class="form-control" type="text" name="quantity" value="{{product.quantity}}"
-                    id="quantity" placeholder="Số lượng">
+                  <input type="text" onchange="validation()" class="form-control" type="text" name="quantity"
+                    value="{{product.quantity}}" id="quantity" placeholder="Số lượng">
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-2 col-sm-2 control-label">Mô tả</label>
                 <div class="col-sm-10">
-                  <input type="text" onchange="validation()" class="form-control" type="text" name="description" value="{{product.description}}"
-                    id="description" placeholder="Mô tả">
+                  <input type="text" onchange="validation()" class="form-control" type="text" name="description"
+                    value="{{product.description}}" id="description" placeholder="Mô tả">
                 </div>
               </div>
               <div class="form-group" style="margin-left: 0px;">
@@ -149,67 +149,58 @@
         </div><!-- col-lg-12-->
       </div><!-- /row -->
 
-      <!--main content end-->
-      <!--footer start-->
-      {{!-- <footer style="position: fixed; bottom: 0; left: 210px; width: 1223px" class="site-footer">
-        <div class="text-center">
-          2014 - Alvarez.is
-          <a href="index.html#" class="go-top">
-            <i class="fa fa-angle-up"></i>
-          </a>
-        </div>
-      </footer> --}}
-      <!--footer end-->
+
     </section>
-    <script>
-      // http://locahost:3000/products/:id/edit
-      const edit = (id) => {
-        window.location.href = `products/${id}/edit`;
+  </section>
+  <script>
+    // http://locahost:3000/products/:id/edit
+    const edit = (id) => {
+      window.location.href = `products/${id}/edit`;
 
+    }
+    function thisFileUpload() {
+      document.getElementById("image-file").click();
+
+    };
+
+    const onChangeFile = () => {
+      const file = document.getElementById('image-file').files[0];
+      const reader = new FileReader();
+      reader.onload = e => {
+        document.getElementById('image-view').src = e.target.result;
+        document.getElementById('image-view').style.display = 'block';
       }
-      function thisFileUpload() {
-        document.getElementById("image-file").click();
+      reader.readAsDataURL(file);
+    }
 
-      };
-
-      const onChangeFile = () => {
-        const file = document.getElementById('image-file').files[0];
-        const reader = new FileReader();
-        reader.onload = e => {
-          document.getElementById('image-view').src = e.target.result;
-          document.getElementById('image-view').style.display = 'block';
-        }
-        reader.readAsDataURL(file);
+    const validation = () => {
+      const name = document.getElementById('name').value;
+      const price = document.getElementById('price').value;
+      const quantity = document.getElementById('quantity').value;
+      const description = document.getElementById('description').value;
+      const submit = document.getElementById('submit');
+      if (!name || name.trim().length == 0 || price.trim().length == 0 || quantity.trim().length == 0 ||
+        description.trim().length == 0) {
+        submit.disabled = true;
+      } else {
+        submit.disabled = false;
       }
-
-     const validation = () => {
-        const name = document.getElementById('name').value;
-        const price = document.getElementById('price').value;
-        const quantity = document.getElementById('quantity').value;
-        const description = document.getElementById('description').value;
-        const submit = document.getElementById('submit');
-        if (!name || name.trim().length == 0 || price.trim().length == 0 || quantity.trim().length == 0 ||
-          description.trim().length == 0) {
-          submit.disabled = true;
-        } else {
-          submit.disabled = false;
-        }
+      {
         {
-          {
-           if (price.trim().length == 0) {
-              submit.disabled = true;
-            } else {
-              submit.disabled = false;
-            }
+          if (price.trim().length == 0) {
+            submit.disabled = true;
+          } else {
+            submit.disabled = false;
+          }
 
-            if (quantity.trim().length == 0) {
-              submit.disabled = true;
-            } else {
-              submit.disabled = false;
-            }
-            }
+          if (quantity.trim().length == 0) {
+            submit.disabled = true;
+          } else {
+            submit.disabled = false;
+          }
         }
-
-
       }
-    </script>
+
+
+    }
+  </script>

@@ -62,6 +62,7 @@ router.get('/:id/edit',[authentication.checkLogin], async function (req, res, ne
   // lấy thông tin chi tiết 1 nhãn hiệu
   const { id } = req.params;
   const brand = await brandsController.getBrandByIdToShowDetail(id);
+  console.log( brand);
   res.render('detail_brand', { brand: brand});
 });
 
@@ -81,6 +82,7 @@ router.post('/:id/edit', [upload.single('image'),authentication.checkLogin], asy
     let image = `http://192.168.1.253:3000/images/${file.filename}`;
     body = { ...body, image: image };
   }
+  console.log(params.id, body);
   await brandsController.update(params.id, body);
   res.redirect('/brands');
 });

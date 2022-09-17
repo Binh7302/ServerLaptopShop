@@ -29,7 +29,7 @@ exports.delete = async (id) => {
 }
 
 
-//sửa sản phẩm
+//cập nhật nhãn hiệu
 exports.update = async (id, brand) => {
     await brandModel.findByIdAndUpdate(id, brand);
 }

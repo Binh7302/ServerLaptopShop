@@ -51,8 +51,8 @@
             <span>Forms</span>
           </a>
           <ul class="sub">
-            <li class="active"><a href="/products/add">Thêm sản phẩm</a></li>
-            <li><a href="/brands/add">Thêm nhãn hiệu</a></li>
+            <li><a href="/products/add">Thêm sản phẩm</a></li>
+            <li class="active"><a href="/brands/add">Thêm nhãn hiệu</a></li>
           </ul>
         </li>
         <li class="sub-menu">
@@ -84,58 +84,64 @@
   <!--main content start-->
   <section id="main-content" style="margin-bottom: 50px;">
     <section class="wrapper">
-      <h3><i class="fa fa-angle-right"></i> Form Thêm Sản Phẩm</h3>
+      <h3><i class="fa fa-angle-right"></i> Xử lý Đơn hàng</h3>
 
       <!-- BASIC FORM ELELEMNTS -->
       <div class="row mt">
         <div class="col-lg-12">
           <div class="form-panel" >
-            <h4 class="mb"><i class="fa fa-angle-right" ></i> Điền thông tin</h4>
-            <form class="form-horizontal style-form" method="post" action="/products" enctype="multipart/form-data" >
-              <div class="form-group">
-                <label class="col-sm-2 col-sm-2 control-label">Tên sản phẩm</label>
+            <h4 class="mb"><i class="fa fa-angle-right" ></i> Thông tin Đơn hàng</h4>
+            <form class="form-horizontal style-form" method="post" action="/oders/odersProcessing/{{oder._id}}/edit" enctype="multipart/form-data" >
+             <div class="form-group">
+                <label class="col-sm-2 col-sm-2 control-label">Tên khách hàng</label>
                 <div class="col-sm-10">
-                  <input type="text" onchange="validation()" class="form-control" type="text" name="name" id="name"
-                    placeholder="Tên sản phẩm">
+                  <input disabled type="text" class="form-control" type="text" name="name" id="name" value="{{user.name}}"
+                    placeholder="Tên khách hàng">
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-2 col-sm-2 control-label">Giá</label>
+                <label class="col-sm-2 col-sm-2 control-label">Email</label>
                 <div class="col-sm-10">
-                  <input type="text" onchange="validation()" class="form-control" type="text" name="price" id="price"
-                    placeholder="Giá">
+                  <input disabled type="text" class="form-control" type="text" name="email" id="email" value="{{user.email}}"
+                    placeholder="Email">
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-2 col-sm-2 control-label">Số lượng</label>
+                <label class="col-sm-2 col-sm-2 control-label">Số điện thoại</label>
                 <div class="col-sm-10">
-                  <input type="text" onchange="validation()" class="form-control" type="text" name="quantity"
-                    id="quantity" placeholder="Số lượng">
+                  <input disabled type="text" class="form-control" type="text" name="phonenumber" id="phonenumber" value="{{user.phonenumber}}"
+                    placeholder="Số điện thoại">
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-2 col-sm-2 control-label">Mô tả</label>
+                <label class="col-sm-2 col-sm-2 control-label">Địa chỉ</label>
                 <div class="col-sm-10">
-                  <input type="text" onchange="validation()" class="form-control" type="text" name="description"
-                    id="description" placeholder="Mô tả">
+                  <input disabled type="text" class="form-control" type="text" name="address" id="address" value="{{oder.address}}"
+                    placeholder="Địa chỉ">
                 </div>
               </div>
-              <div class="form-group" style="margin-left: 0px;">
-                <label>Hình ảnh</label>
-                <input onchange="onChangeFile();" type="file" id="image-file" name="image" style="margin-left: 200px;">
-                <div class="btn-image" id="button" name="button" onclick="thisFileUpload();"style="margin-left: 200px;">Chose file</div>
-                <img style="display: none; object-fit: cover;margin-left: 200px;" src="" width="200" height="200" id="image-view" />
+              <div class="form-group">
+                <label class="col-sm-2 col-sm-2 control-label">Trạng thái</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" type="text" name="status" id="status" value="{{oder.status}}"
+                    placeholder="Trạng thái">
+                </div>
               </div>
-              <div class="form-group" style="margin-left: 0px; margin-right: 0px;">
-                <label>Nhãn hiệu</label>
-                <select class="form-control" name="brand">
-                  {{#each brand}}
-                  <option style="color: black;" value="{{this._id}}">{{this.name}}
-                  </option>
-                  {{/each}}
-                </select>
+              <div class="form-group">
+                <label class="col-sm-2 col-sm-2 control-label">Tổng tiền</label>
+                <div class="col-sm-10">
+                  <input disabled type="text" class="form-control" type="text" name="total" id="total" value="{{oder.total}}"
+                    placeholder="Tổng tiền">
+                </div>
               </div>
-              <button disabled type="submit" id="submit" style="margin-left: 1050px; width:100px">Thêm</button>
+              <div class="form-group">
+                <label class="col-sm-2 col-sm-2 control-label">Ngày tạo</label>
+                <div class="col-sm-10">
+                  <input disabled type="text" class="form-control" type="text" name="createAt" id="createAt" value="{{oder.createAt}}"
+                    placeholder="Ngày tạo">
+                </div>
+              </div>
+              <button type="submit" id="submit" style="margin-left: 1050px; width:100px">Lưu</button>
             </form>
           </div>
         </div><!-- col-lg-12-->
@@ -154,51 +160,35 @@
       <!--footer end-->
     </section>
     <script>
-      const validation = () => {
+     // http://locahost:3000/brands/:id/edit
+    const edit = (id) => {
+        window.location.href = `brands/${id}/edit`;
+
+    }
+    function thisFileUpload() {
+        document.getElementById("image-file").click();
+
+    };
+
+    const onChangeFile = () => {
+        const file = document.getElementById('image-file').files[0];
+        const reader = new FileReader();
+        reader.onload = e => {
+            document.getElementById('image-view').src = e.target.result;
+            document.getElementById('image-view').style.display = 'block';
+        }
+        reader.readAsDataURL(file);
+    }    
+
+   const validation = () => {
         const name = document.getElementById('name').value;
-        const price = document.getElementById('price').value;
-        const quantity = document.getElementById('quantity').value;
-        const description = document.getElementById('description').value;
         const submit = document.getElementById('submit');
-        if (!name || name.trim().length == 0 || price.trim().length == 0 || quantity.trim().length == 0 ||
-          description.trim().length == 0) {
+        if (!name || name.trim().length == 0) {
           submit.disabled = true;
         } else {
           submit.disabled = false;
         }
-        {
-          {
-           if (price.trim().length == 0) {
-              submit.disabled = true;
-            } else {
-              submit.disabled = false;
-            }
-
-            if (quantity.trim().length == 0) {
-              submit.disabled = true;
-            } else {
-              submit.disabled = false;
-            }
-            }
-        }
 
 
       }
-
-      function thisFileUpload() {
-        document.getElementById("image-file").click();
-
-      };
-
-      const onChangeFile = () => {
-        const file = document.getElementById('image-file').files[0];
-        const reader = new FileReader();
-        reader.onload = e => {
-          document.getElementById('image-view').src = e.target.result;
-          document.getElementById('image-view').style.display = 'block';
-        }
-        reader.readAsDataURL(file);
-      }
-
-
     </script>
