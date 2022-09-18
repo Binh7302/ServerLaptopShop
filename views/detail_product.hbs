@@ -117,13 +117,13 @@
               <div class="form-group">
                 <label class="col-sm-2 col-sm-2 control-label">Mô tả</label>
                 <div class="col-sm-10">
-                  <input type="text" onchange="validation()" class="form-control" type="text" name="description"
-                    value="{{product.description}}" id="description" placeholder="Mô tả">
+                  <textarea type="text" onchange="validation()" class="form-control" type="text" name="description"
+                     id="description" placeholder="Mô tả" style="resize: vertical;" rows="4">{{product.description}}</textarea>
                 </div>
               </div>
               <div class="form-group" style="margin-left: 0px;">
                 <label>Hình ảnh</label>
-                <input onchange="onChangeFile();" type="file" id="image-file" name="image" style="margin-left: 200px;">
+                <input onchange="onChangeFile();" type="file" id="image-file" name="image" style="margin-left: 140px;display: inline-block;">
                 <div class="btn-image" id="button" name="button" onclick="thisFileUpload();"
                   style="margin-left: 200px;">Chose file</div>
                 <img style="display: none; object-fit: cover;margin-left: 200px;" src="" width="200" height="200"
@@ -131,7 +131,7 @@
               </div>
               <div class="form-group" style="margin-left: 0px; margin-right: 0px;">
                 <label>Nhãn hiệu</label>
-                <select class="form-control" name="brand">
+                <select class="form-control" name="brand" style="width: 300px; display: inline-block; margin-left: 130px;">
                   {{#each brand}}
                   {{#if this.selected}}
                   <option selected style="color: black;" value="{{this._id}}">{{this.name}}

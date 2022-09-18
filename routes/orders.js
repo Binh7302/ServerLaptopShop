@@ -4,6 +4,7 @@ var router = express.Router();
 const authentication = require('../middle/authentication');
 const oderController = require('../components/carts/controller');
 const userController = require('../components/users/controller');
+const statusController = require('../components/status/controller');
 const upload = require('../middle/upload');
 
 /*
@@ -42,8 +43,9 @@ router.get('/odersProcessing/:id/edit',[authentication.checkLogin], async functi
   const { id } = req.params;
   const oder = await oderController.getOdersById(id);
   const user = await userController.getUsersById(oder.userID._id);
-  console.log(oder, user);
-  res.render('detail_oder', {oder: oder, user: user});
+  const status = await statusController.getStatusForOneOder(oder.statusID._id);
+  console.log(oder, user, status);
+  res.render('detail_oder', {oder: oder, user: user, status: status});
 });
 
 /*

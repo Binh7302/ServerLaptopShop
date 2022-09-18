@@ -3,6 +3,7 @@ var router = express.Router();
 
 const productController = require('../components/products/controller');
 const brandController = require('../components/brands/controller');
+// const userController = require('../components/users/controller');
 const authentication = require('../middle/authentication');
 const upload = require('../middle/upload');
 /*

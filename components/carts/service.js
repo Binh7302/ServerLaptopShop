@@ -4,7 +4,7 @@ const cartModel = require('./model');
 
 //Lấy thông tin danh sách đơn hàng
 exports.getCarts = async () => {
-    const carts = await cartModel.find().populate('userID');
+    const carts = await cartModel.find().populate('userID statusID');
     return carts;
 }
 

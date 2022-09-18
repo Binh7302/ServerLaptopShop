@@ -10,7 +10,7 @@ exports.getCarts = async () => {
         item = {
             _id: item._id,
             userID: item.userID,
-            status: item.status,
+            statusID: item.statusID,
             total: item.total,
             createAt: date.format(item.createAt),
             index: index + 1,
@@ -23,7 +23,8 @@ exports.getCarts = async () => {
 // Lấy danh sách đơn hàng cần xử lý
 exports.getOdersForProcessing = async () => {
     let data = await cartService.getCarts();
-    data = data.filter(item => item.status == 0);
+    var id = "6326cda6fc13ae18e5000000";
+    data = data.filter(item => item.statusID.equals(id));
     data = data.map((item, index) => {
         item = {
             _id: item._id,
@@ -45,7 +46,7 @@ exports.getOdersById = async (id) => {
         _id: oder._id,
         userID: oder.userID,
         address: oder.address,
-        status: oder.status,
+        statusID: oder.statusID,
         total: oder.total,
         createAt: date.format(oder.createAt),
     }

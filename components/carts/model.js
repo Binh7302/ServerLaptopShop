@@ -6,7 +6,7 @@ const cartSchema = new Schema({
     id: { type: ObjectId },
     userID: { type: Schema.Types.ObjectId, ref: 'user' },
     address: { type: String },
-    status: { type: Number },
+    statusID: { type: Schema.Types.ObjectId, ref: 'status' },
     total: { type: Number },
     createAt: { type: Date },
 });
