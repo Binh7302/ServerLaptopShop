@@ -174,7 +174,7 @@ const apiController = {
     // lay tat ca cart cho ds lich su mua hang
     getAllCart: async (req, res) => {
         try {
-            const carts = await Cart.find({userID: req.params.userID});
+            const carts = await Cart.find({userID: req.params.userID}).populate("statusID");
             res.status(200).json(carts);
         } catch (err) {
             res.status(500).json(err);
@@ -186,6 +186,17 @@ const apiController = {
         try {
             const cartDetails = await CartDetail.find({cartID: req.params.cartID});
             res.status(200).json(cartDetails);
+        } catch (err) {
+            res.status(500).json(err);
+        }
+    },
+
+    // cap nhat cart
+    updateCart: async (req, res) => {
+        try {
+            const cart = await Cart.findById(req.params.id);
+            await cart.updateOne({ $set: req.body });
+            res.status(200).json("Updated successfully!");
         } catch (err) {
             res.status(500).json(err);
         }

@@ -105,5 +105,9 @@ router.get("/get-all-cart/:userID", apiController.getAllCart);
 // lay ds cartDetail theo cartID
 // http://localhost:3000/api/get-all-cartDetail/ idcart
 router.get("/get-all-cartDetail/:cartID/", apiController.getAllCartDetail);
+
+// cap nhat cart
+// http://localhost:3000/api/update-cart/:id
+router.put("/update-cart/:id", apiController.updateCart);
  
 module.exports = router;

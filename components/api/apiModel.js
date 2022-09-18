@@ -37,8 +37,9 @@ const cartSchema = new mongoose.Schema({
     address: {
         type: String
     },
-    status: {
-        type: Number
+    statusID: {
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'status' 
     },
     total: {
         type: Number
