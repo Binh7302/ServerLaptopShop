@@ -31,7 +31,7 @@
 
                 <p class="centered"><a href="profile.html"><img src="/images/ui-sam.jpg" class="img-circle"
                             width="60"></a></p>
-                <h5 class="centered">Marcel Newman</h5>
+                <h5 class="centered">Admin</h5>
 
                 <li class="sub-menu">
                     <a class="active" href="javascript:;">
@@ -68,7 +68,7 @@
                         <span>Thống kê</span>
                     </a>
                     <ul class="sub">
-                        <li><a href="/">Mặt hàng bán chạy</a></li>
+                        <li><a href="/statistic">Khách hàng & Sản phẩm</a></li>
                         <li><a href="/">Thông báo</a></li>
                     </ul>
                 </li>
@@ -84,7 +84,7 @@
       *********************************************************************************************************************************************************** -->
     <!--main content start-->
     <div style="position: absolute; top: 120px; left: 230px;" class="content" >
-        <div style="width: 970px"  class="container">
+        <div style="width: 1000px"  class="container">
             <div class="table-wrapper">
                 <div class="table-title">
                     <div class="row">
@@ -98,12 +98,12 @@
                         <tr>
                             <th style="width: 40px;">STT</th>
                             <th style="width: 200px;">Mã đơn hàng</th>
-                            <th style="width: 200px;">Tên khách hàng</th>
+                            <th style="width: 180px;">Tên khách hàng</th>
                             <th style="width: 150px;">Số điện thoại</th>
-                            <th style="width: 100px;">Tổng tiền</th>
+                            <th style="width: 90px;">Tổng tiền</th>
                             <th style="width: 130px;">Ngày tạo</th>
-                            <th style="width: 150px;">Trạng thái</th>  
-                            {{!-- <th></th>               --}}
+                            <th style="width: 160px;">Trạng thái</th>  
+                            <th></th>              
                         </tr>
                     </thead>
                     <tbody>
@@ -116,10 +116,10 @@
                             <td>{{this.total}}</td>
                             <td>{{this.createAt}}</td>
                             <td>{{this.statusID.name}}</td>   
-                            {{!-- <td>
+                            <td>
                                 <a class="edit" title="Edit" data-toggle="tooltip" onclick="edit('{{this._id}}')"><i
                                         class="material-icons">process</i></a>
-                            </td>                       --}}
+                            </td>                      
                         </tr>
                         {{/each}}
                     </tbody>
@@ -144,7 +144,7 @@
   
   // http://locahost:3000/oders/odersProcessing/:id/edit
   const edit = (id) => {
-    window.location.href = `oders/${id}/edit`;
+    window.location.href = `oders/odersProcessing/${id}/edit`;
 
   }
 

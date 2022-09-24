@@ -5,6 +5,7 @@ const authentication = require('../middle/authentication');
 const oderController = require('../components/carts/controller');
 const userController = require('../components/users/controller');
 const statusController = require('../components/status/controller');
+const cartDetailController = require('../components/cartdetails/controller');
 const upload = require('../middle/upload');
 
 /*
@@ -44,8 +45,9 @@ router.get('/odersProcessing/:id/edit',[authentication.checkLogin], async functi
   const oder = await oderController.getOdersById(id);
   const user = await userController.getUsersById(oder.userID._id);
   const status = await statusController.getStatusForOneOder(oder.statusID._id);
+  const cartDetail = await cartDetailController.getCartDetailById(id);
   console.log(oder, user, status);
-  res.render('detail_oder', {oder: oder, user: user, status: status});
+  res.render('detail_oder', {oder: oder, user: user, status: status, cartDetail: cartDetail});
 });
 
 /*
@@ -64,3 +66,5 @@ router.post('/odersProcessing/:id/edit', [upload.single('image'),authentication.
 });
 
 module.exports = router;
+
+

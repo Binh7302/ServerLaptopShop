@@ -30,7 +30,7 @@
       <ul class="sidebar-menu" id="nav-accordion">
 
         <p class="centered"><a href="profile.html"><img src="/images/ui-sam.jpg" class="img-circle" width="60"></a></p>
-        <h5 class="centered">Marcel Newman</h5>
+        <h5 class="centered">Admin</h5>
 
         <li class="sub-menu">
           <a href="javascript:;">
@@ -67,7 +67,7 @@
             <span>Thống kê</span>
           </a>
           <ul class="sub">
-            <li><a href="/">Mặt hàng bán chạy</a></li>
+            <li><a href="/statistic">Khách hàng & Sản phẩm</a></li>
             <li><a href="/">Thông báo</a></li>
           </ul>
         </li>
@@ -82,7 +82,7 @@
       MAIN CONTENT
       *********************************************************************************************************************************************************** -->
   <!--main content start-->
-  <section id="main-content" style="margin-bottom: 50px;">
+  <section id="main-content" >
     <section class="wrapper">
       <h3><i class="fa fa-angle-right"></i> Xử lý Đơn hàng</h3>
 
@@ -155,18 +155,48 @@
         </div><!-- col-lg-12-->
       </div><!-- /row -->
 
-      <!--main content end-->
-      <!--footer start-->
-      {{!-- <footer style="position: fixed; bottom: 0; left: 210px; width: 1223px" class="site-footer">
-        <div class="text-center">
-          2014 - Alvarez.is
-          <a href="index.html#" class="go-top">
-            <i class="fa fa-angle-up"></i>
-          </a>
-        </div>
-      </footer> --}}
-      <!--footer end-->
+ 
     </section>
+    </section>
+    <div style="position: absolute; top: 750px; left: 230px; margin-bottom: 50px;" class="content" >
+        <div style="width: 750px" class="container">
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <h2>Danh sách <b>Sản phẩm đã mua</b></h2>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th style="width: 40px;">STT</th>
+                            <th style="width: 200px;">Mã sản phẩm</th>
+                            <th style="width: 200px;">Tên sản phẩm</th>
+                            <th style="width: 80px;">Giá</th>
+                            <th style="width: 80px;">Số lượng</th>
+                            <th style="width: 150px;">Hình ảnh</th>      
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each cartDetail}}
+                        <tr>
+                            <td>{{this.index}}</td>
+                            <td>{{this.productID._id}}</td>
+                            <td>{{this.productID.name}}</td>
+                            <td>{{this.amount}}</td>
+                            <td>{{this.quantityPurchased}}</td>
+                            <td>
+                                <img src="{{this.productID.image}}" width="150" height="125">
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
     <script>
       // http://locahost:3000/brands/:id/edit
       const edit = (id) => {

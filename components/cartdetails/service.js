@@ -3,15 +3,16 @@ const cartModel = require('../carts/model');
 const userModel = require('../users/model');
 const statusModel = require('../status/model');
 const productModel = require('../products/model');
+const cartDetailModel = require('../cartdetails/model');
 
-exports.gettop10ProductsAndAmount = async() => {
+exports.gettop10ProductsAndAmount = async () => {
   //Lấy statusID của status "Đang được giao"
-  const status = await statusModel.findOne({ name: 'Đang giao hàng'});
+  const status = await statusModel.findOne({ name: 'Đang giao hàng' });
   //Lấy danh sách các giỏ hàng đang được giao 
   const carts = await cartModel.aggregate(
     [
-      {$match: {statusID: status._id}},
-      {$group: {_id: "$_id"}}
+      { $match: { statusID: status._id } },
+      { $group: { _id: "$_id" } }
     ]
   );
   //Tạo 1 array để chứa productid
@@ -23,8 +24,8 @@ exports.gettop10ProductsAndAmount = async() => {
     //gắn giá trị vào biến tạm(có thể là 1 object array)
     flag = await cartdetailModel.aggregate(
       [
-        {$match: {cartID: carts[index]._id}},
-        {$group: {_id: "$productID", amount: {$sum: "$quantityPurchased"}}}
+        { $match: { cartID: carts[index]._id } },
+        { $group: { _id: "$productID", amount: { $sum: "$quantityPurchased" } } }
       ]
     )
     //dùng vòng lặp for lấy từng item của array để push vào array chứa productid
@@ -37,7 +38,7 @@ exports.gettop10ProductsAndAmount = async() => {
   const top10ProductIDandAmount = [];
   let count = 0;
   for (let index = ProductID.length; index >= 0; index--) {
-    if(count != 11){
+    if (count != 11) {
       top10ProductIDandAmount.push(ProductID[index]);
       count++;
     }
@@ -60,10 +61,10 @@ exports.gettop10ProductsAndAmount = async() => {
 exports.getTop10UsersAndAmount = async () => {
   const top10UsersIDAndAmount = await cartModel.aggregate(
     [
-      {$match: {}},
-      {$group: {_id: "$userID", amount: {$sum: "$total"}}},
-      {$limit: 10},
-      {$sort: {amount: -1}}
+      { $match: {} },
+      { $group: { _id: "$userID", amount: { $sum: "$total" } } },
+      { $limit: 10 },
+      { $sort: { amount: -1 } }
     ]
   );
   const top10Users = [];
@@ -76,4 +77,10 @@ exports.getTop10UsersAndAmount = async () => {
   }
   console.log("top users: " + top10UsersAndAmount);
   return top10UsersAndAmount;
+}
+
+//Lấy thông tin chi tiết 1 giỏ hàng ( sai - phải kiếm theo cartID)
+exports.getCartDetails = async () => {
+  const cart = await cartDetailModel.find().populate('cartID productID');
+  return cart;
 }
